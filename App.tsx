@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { FunctionComponent, useState } from "react";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/Feather";
 import ListItem from "./components/ListItem";
 
 const App: FunctionComponent = () => {
@@ -37,15 +37,15 @@ const App: FunctionComponent = () => {
 
   return (
     <View style={styles.rootContainer}>
-      <StatusBar backgroundColor={"#fff"} />
+      <StatusBar backgroundColor={"#ffc8dd"} />
       <View style={styles.inputContainer}>
         <TextInput
           onChange={onChangeHandler}
           value={textValue}
           style={styles.textInput}
         />
-        <Pressable onPress={addTask}>
-          <Icon style={styles.addIcon} name="plus-square" />
+        <Pressable style={styles.addIconContainer} onPress={addTask}>
+          <Icon style={styles.addIcon} name="plus" />
         </Pressable>
       </View>
       <View style={styles.tasksContainer}>
@@ -63,8 +63,8 @@ export default App;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    backgroundColor: "#fff",
-    margin: "5%",
+    backgroundColor: "#ffc8dd",
+    padding: "5%",
   },
   inputContainer: {
     flexDirection: "row",
@@ -74,10 +74,20 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     fontSize: 16,
+    fontWeight: "300",
     padding: "1%",
-    borderWidth: 2,
     borderRadius: 5,
+    backgroundColor: "#fff",
   },
-  addIcon: { paddingLeft: "3%", fontSize: 40 },
-  tasksContainer: { flex: 1 },
+  addIconContainer: {
+    backgroundColor: "#bde0fe",
+    marginLeft: "2%",
+    padding: "1%",
+    borderRadius: 5,
+    elevation: 2,
+  },
+  addIcon: {
+    fontSize: 30,
+  },
+  tasksContainer: { flex: 1, marginTop: "5%" },
 });

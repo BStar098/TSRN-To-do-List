@@ -26,15 +26,16 @@ const ListItem = ({ text, id, deleteTask }: AppProps) => {
 const styles = StyleSheet.create({
   taskTextContainer: {
     padding: "3%",
-    borderBottomWidth: 2,
-    borderColor: "#bde0fe",
+
+    elevation: 2,
+    borderRadius: 5,
     marginTop: "2%",
-    elevation: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    backgroundColor: "#fff",
   },
-  taskText: { fontSize: 16 },
+  taskText: { fontSize: 16, fontWeight: "300" },
   deleteIcon: {
     fontSize: 20,
     color: "rgba(255, 116, 116, 0.8)",
