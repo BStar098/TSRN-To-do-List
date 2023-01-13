@@ -1,25 +1,43 @@
-import React, { FC, FunctionComponent } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 type AppProps = {
+  id: string;
   text: string;
+  deleteTask: CallableFunction;
 };
 
-const ListItem = ({ text }: AppProps) => {
+const ListItem = ({ text, id, deleteTask }: AppProps) => {
   return (
     <View style={styles.taskTextContainer}>
       <Text style={styles.taskText}>{text}</Text>
+      <Icon
+        onPress={() => {
+          deleteTask(id);
+        }}
+        style={styles.deleteIcon}
+        name="trash"
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   taskTextContainer: {
-    backgroundColor: "purple",
-    padding: "2%",
-    borderRadius: 10,
-    marginTop:'2%'
+    padding: "3%",
+    borderBottomWidth: 2,
+    borderColor: "#bde0fe",
+    marginTop: "2%",
+    elevation: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  taskText: { fontSize: 16, color: "white" },
+  taskText: { fontSize: 16 },
+  deleteIcon: {
+    fontSize: 20,
+    color: "rgba(255, 116, 116, 0.8)",
+  },
 });
 export default ListItem;
