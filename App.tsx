@@ -1,13 +1,15 @@
 import {
+  Alert,
   FlatList,
   NativeSyntheticEvent,
   StatusBar,
   TextInputChangeEventData,
 } from "react-native";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { ChangeEvent, FunctionComponent, useState } from "react";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { FunctionComponent, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import ListItem from "./components/ListItem";
+
 const App: FunctionComponent = () => {
   const [textValue, setTextValue] = useState<string>("");
   const [tasksList, setTasksList] = useState<string[]>([]);
@@ -17,9 +19,20 @@ const App: FunctionComponent = () => {
   ): void => {
     setTextValue(event.nativeEvent.text);
   };
-  const addTask = (): void => {
+
+  const addTask: VoidFunction = (): void => {
+    if (!textValue) {
+      return Alert.alert("New Task", "Task cannot be empty!");
+    } else if (tasksList.includes(textValue)) {
+      return Alert.alert("New Task", "Tasks cannot be repeated!");
+    }
     setTasksList((tasksList) => [...tasksList, textValue]);
     setTextValue("");
+  };
+  const deleteTask: CallableFunction = (taskName: string): void => {
+    setTasksList((taskList) =>
+      taskList.filter((taskElement) => taskElement != taskName)
+    );
   };
 
   return (
@@ -35,10 +48,14 @@ const App: FunctionComponent = () => {
           <Icon style={styles.addIcon} name="plus-square" />
         </Pressable>
       </View>
-      <FlatList
-        data={tasksList}
-        renderItem={(item) => <ListItem text={item.item} />}
-      />
+      <View style={styles.tasksContainer}>
+        <FlatList
+          data={tasksList}
+          renderItem={(item) => (
+            <ListItem id={item.item} text={item.item} deleteTask={deleteTask} />
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -62,5 +79,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   addIcon: { paddingLeft: "3%", fontSize: 40 },
-  tasksContainer: {},
+  tasksContainer: { flex: 1 },
 });
