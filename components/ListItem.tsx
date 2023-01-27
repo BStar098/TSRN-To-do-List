@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 type AppProps = {
@@ -12,13 +12,15 @@ const ListItem = ({ text, id, deleteTask }: AppProps) => {
   return (
     <View style={styles.taskTextContainer}>
       <Text style={styles.taskText}>{text}</Text>
-      <Icon
+      <Pressable
+        android_ripple={{ color: "rgba(255, 116, 116, 0.8)" }}
         onPress={() => {
           deleteTask(id);
         }}
-        style={styles.deleteIcon}
-        name="trash"
-      />
+        style={({ pressed }) => pressed && styles.pressedItem}
+      >
+        <Icon style={styles.deleteIcon} name="trash" />
+      </Pressable>
     </View>
   );
 };
@@ -26,7 +28,6 @@ const ListItem = ({ text, id, deleteTask }: AppProps) => {
 const styles = StyleSheet.create({
   taskTextContainer: {
     padding: "3%",
-
     elevation: 2,
     borderRadius: 5,
     marginTop: "2%",
@@ -40,5 +41,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "rgba(255, 116, 116, 0.8)",
   },
+  pressedItem: { opacity: 0.5 },
 });
 export default ListItem;
