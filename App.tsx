@@ -9,17 +9,20 @@ import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { FunctionComponent, useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import ListItem from "./components/ListItem";
+import EditTaskModal from "./components/EditTaskModal";
 
 const App: FunctionComponent = () => {
   const [textValue, setTextValue] = useState<string>("");
   const [tasksList, setTasksList] = useState<string[]>([]);
+  const [modalState, setModalState] = useState<boolean>(false);
 
   const onChangeHandler = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     setTextValue(event.nativeEvent.text);
   };
-
+  const modalOpenHandler: CallableFunction = () => setModalState(true);
+  const modalCloseHandler: CallableFunction = () => setModalState(false);
   const addTask: VoidFunction = (): void => {
     if (!textValue) {
       return Alert.alert("New Task", "Task cannot be empty!");
@@ -37,6 +40,7 @@ const App: FunctionComponent = () => {
 
   return (
     <View style={styles.rootContainer}>
+      <EditTaskModal modalState={modalState} modalCloseHandler={modalCloseHandler}/>
       <StatusBar backgroundColor={"#ffc8dd"} />
       <View style={styles.inputContainer}>
         <TextInput
@@ -52,7 +56,12 @@ const App: FunctionComponent = () => {
         <FlatList
           data={tasksList}
           renderItem={(item) => (
-            <ListItem id={item.item} text={item.item} deleteTask={deleteTask} />
+            <ListItem
+              id={item.item}
+              text={item.item}
+              deleteTask={deleteTask}
+              modalOpenHandler={modalOpenHandler}
+            />
           )}
         />
       </View>
