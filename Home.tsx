@@ -6,7 +6,7 @@ import {
   TextInputChangeEventData,
 } from "react-native";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
-import {useState } from "react";
+import { useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import ListItem from "./components/ListItem";
 
@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   const [textValue, setTextValue] = useState<string>("");
   const [tasksList, setTasksList] = useState<string[]>([]);
 
-        const onChangeHandler = (
+  const onChangeHandler = (
     event: NativeSyntheticEvent<TextInputChangeEventData>
   ): void => {
     setTextValue(event.nativeEvent.text);
