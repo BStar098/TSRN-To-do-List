@@ -1,3 +1,4 @@
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './Home';
@@ -15,7 +16,5 @@ const App : React.FC = () => {
       </Tab.Navigator>
       </NavigationContainer>
      
-    );
-  }
-
 export default App
+
