@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Home from "./Home";
 import Test from "./screens/Test";
 
+
 const Tab = createBottomTabNavigator();
 
 const App: React.FC = () => {
@@ -20,8 +21,10 @@ const App: React.FC = () => {
           component={Test}
         />
       </Tab.Navigator>
+
     </NavigationContainer>
   );
 };
 
 export default App;
+

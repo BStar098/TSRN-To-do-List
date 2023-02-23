@@ -52,7 +52,7 @@ const Home: React.FC = () => {
         <FlatList
           data={tasksList}
           renderItem={(item) => (
-            <ListItem id={item.item} text={item.item} deleteTask={deleteTask} />
+            <ListItem id={item.item} text={item.item} deleteTask={deleteTask}  />
           )}
         />
       </View>
